@@ -24,6 +24,14 @@ Route::get('/display-car', function () {
     ];
     return view('cars.show', ['data' => $data]);
 });
+Route::get('/display-cars', function () {
+    $cars = [
+        Car::create(["Toyota", 2020, 5000]),
+        Car::create(["BMW", 2010, 0]),
+        Car::create(["Renault", 2025, 200]),
+    ];
+    return view("cars.index", ["cars" => $cars]);
+});
 
 Route::get('/contact/create', [ContactController::class, 'contact'])->name("contact.page");
 Route::get('/feedback', [ContactController::class, 'index'])->name("contact.index");
