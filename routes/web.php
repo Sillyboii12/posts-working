@@ -2,15 +2,25 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('posts', [PostController::class, 'index']);
-Route::get('posts/create', [PostController::class, 'create']);
-Route::post('posts', [PostController::class, 'store']);
-Route::get('posts/{id}/edit', [PostController::class, 'edit']);
-Route::put('posts/{id}/update', [PostController::class, 'update']);
-Route::delete('posts/{id}/destroy', [PostController::class, 'destroy']);
-Route::get('posts/{id}', [PostController::class, 'show']);
+Route::get('/about', function (){
+    return view('about');
+})->name("about");
+Route::get('/colors', function (){
+    return view('colors', ['colors' => ['red', 'blue', 'green', 'yellow']]);
+})->name("colors");
+Route::get('/contact/create', [ContactController::class, 'contact'])->name("contact.page");
+Route::get('/feedback', [ContactController::class, 'index'])->name("contact.index");
+Route::post('/contact/create', [ContactController::class, 'store'])->name("contact.store");
+Route::get('/posts', [PostController::class, 'index'])->name("posts.index");
+Route::get('/posts/create', [PostController::class, 'create'])->name("posts.create");
+Route::post('/posts', [PostController::class, 'store'])->name("posts.store");
+Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name("posts.edit");
+Route::put('/posts/{post}/update', [PostController::class, 'update'])->name("posts.update");
+Route::delete('/posts/{post}/destroy', [PostController::class, 'destroy'])->name("posts.destroy");
+Route::get('/posts/{post}', [PostController::class, 'show'])->name("posts.show");
+Route::patch('/posts/{post}', [PostController::class, 'status'])->name("posts.status");

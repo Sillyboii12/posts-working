@@ -1,21 +1,36 @@
 <x-app-layout>
     <h1>All posts</h1>
-    <a href="/posts/create">Create post</a>
+    <a href="{{route('posts.create')}}">Create post</a>
+    @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+    @endif
     <ul>
         @foreach($posts as $post)
             <li>
                 <h2>Title: {{ $post->title }}</h2>
                 <p>Content: {{ $post->content }}</p>
                 <div>
-                    <a href="/posts/{{ $post->id }}">Show</a>
-                    <a href="/posts/{{ $post->id }}/edit">Edit</a>
-                    <form action="/posts/{{ $post->id }}/destroy" method="post">
+                    <a  id= "showButton" href="{{route('posts.show', $post)}}">Show</a>
+                    <a  href="{{route('posts.edit', $post)}}">Edit</a>
+                    <form id="deleteButton" action="{{route('posts.destroy', $post)}}" method="post">
                         @csrf
                         @method('delete')
-                        <input type="submit" value="Delete">
+                        <input id= "deleteImprove" type="submit" value="Delete">
                     </form>
                 </div>
             </li>
         @endforeach
     </ul>
+
+@if ($posts->onFirstPage())
+
+@else
+    <a href="{{ $posts->previousPageUrl() }}">Previous</a>
+@endif
+
+@if ($posts->hasMorePages())
+    <a href="{{ $posts->nextPageUrl() }}">Next</a>
+@endif
 </x-app-layout>
