@@ -24,9 +24,8 @@
         @endforeach
     </ul>
 
-@if ($posts->onFirstPage())
-
-@else
+    <br>
+@if ($posts->onFirstPage() == false)
     <a href="{{ $posts->previousPageUrl() }}">Previous</a>
 @endif
 
