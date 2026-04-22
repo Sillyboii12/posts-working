@@ -17,8 +17,12 @@ Route::get('/colors', function (){
 })->name("colors");
 
 Route::get('/display-car', function () {
-    $myCar = Car::create(['Tesla', 2023, 1000]);
-    return $myCar->toHtml();
+    $data = [
+        'name' => "Tesla",
+        'year' => 2023,
+        'totalDistance' => 1000,
+    ];
+    return view('cars.show', ['data' => $data]);
 });
 
 Route::get('/contact/create', [ContactController::class, 'contact'])->name("contact.page");
