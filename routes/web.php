@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ContactController;
+use App\Models\Car;
 
 Route::get('/', function () {
     return view('welcome');
@@ -10,9 +11,16 @@ Route::get('/', function () {
 Route::get('/about', function (){
     return view('about');
 })->name("about");
+
 Route::get('/colors', function (){
     return view('colors', ['colors' => ['red', 'blue', 'green', 'yellow']]);
 })->name("colors");
+
+Route::get('/display-car', function () {
+    $myCar = Car::create(['Tesla', 2023, 1000]);
+    return $myCar->toHtml();
+});
+
 Route::get('/contact/create', [ContactController::class, 'contact'])->name("contact.page");
 Route::get('/feedback', [ContactController::class, 'index'])->name("contact.index");
 Route::post('/contact/create', [ContactController::class, 'store'])->name("contact.store");
