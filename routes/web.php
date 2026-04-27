@@ -3,13 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\EventController;
 use App\Models\Car;
 use App\Models\Event;
 
-Route::get('/display-event', function(){
-    $event = new Event("Riteņu brauciens", "26-01-10", 50);
-    echo $event->showInfo();
-});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -50,3 +48,4 @@ Route::delete('/posts/{post}/destroy', [PostController::class, 'destroy'])->name
 Route::get('/posts/{post}', [PostController::class, 'show'])->name("posts.show");
 Route::patch('/posts/{post}', [PostController::class, 'status'])->name("posts.status");
 Route::post('/posts/{post}/duplicate', [PostController::class, 'duplicate'])->name("posts.duplicate");
+Route::get('/display-event', [EventController::class, 'show'])->name("event.show");

@@ -37,6 +37,7 @@ class Event{
 
     function showInfo()
     {
+        echo "<p>";
         echo
         "\n" .
         $this->title .
@@ -45,5 +46,8 @@ class Event{
         "\n",
         $this->attendeeCount .
         "\n";
+        echo "</p>";
     }
 }
+
+

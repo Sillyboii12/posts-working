@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\EventController;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -96,7 +97,7 @@ class PostController extends Controller
 
     public function duplicate(Post $post){
 
-        
+
         $data = [
             'title' => "Copy of " . $post->title,
             'content' => $post->content,
@@ -106,4 +107,6 @@ class PostController extends Controller
 
         return redirect(route('posts.show', $postCreated));
     }
+
+    
 }
