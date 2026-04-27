@@ -93,4 +93,16 @@ class PostController extends Controller
         ]);
         return redirect(route('posts.show', $post))->with('status', 'Status updated succesfully');
     }
+
+    public function duplicate(Post $post){
+
+        $data = [
+            'title' => "Copy of " . $post->title,
+            'content' => $post->content,
+        ];
+
+        $postCreated = Post::create($data);
+
+        return redirect(route('posts.show', $postCreated));
+    }
 }

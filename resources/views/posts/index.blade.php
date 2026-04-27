@@ -19,6 +19,10 @@
                         @method('delete')
                         <input id= "deleteImprove" type="submit" value="Delete">
                     </form>
+                    <form id="deleteButton" action="{{route('posts.duplicate', $post)}}" method="post">
+                        @csrf
+                        <input id= "deleteImprove" type="submit" value="Duplicate">
+                    </form>
                 </div>
             </li>
         @endforeach

@@ -44,3 +44,4 @@ Route::put('/posts/{post}/update', [PostController::class, 'update'])->name("pos
 Route::delete('/posts/{post}/destroy', [PostController::class, 'destroy'])->name("posts.destroy");
 Route::get('/posts/{post}', [PostController::class, 'show'])->name("posts.show");
 Route::patch('/posts/{post}', [PostController::class, 'status'])->name("posts.status");
+Route::post('/posts/{post}/duplicate', [PostController::class, 'duplicate'])->name("posts.duplicate");
