@@ -9,8 +9,8 @@
     <ul>
         @foreach($posts as $post)
             <li>
-                <h2>Title: {{ $post->title }}</h2>
-                <p>Content: {{ $post->content }}</p>
+                <h2>{{ $post->title }}</h2>
+                <p>{{ $post->content }}</p>
                 <div>
                     <a  id= "showButton" href="{{route('posts.show', $post)}}">Show</a>
                     <a  href="{{route('posts.edit', $post)}}">Edit</a>

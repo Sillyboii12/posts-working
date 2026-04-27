@@ -4,7 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ContactController;
 use App\Models\Car;
+use App\Models\Event;
 
+Route::get('/display-event', function(){
+    $event = new Event("Riteņu brauciens", "26-01-10", 50);
+    echo $event->showInfo();
+});
 Route::get('/', function () {
     return view('welcome');
 });

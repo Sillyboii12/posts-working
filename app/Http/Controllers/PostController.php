@@ -96,6 +96,7 @@ class PostController extends Controller
 
     public function duplicate(Post $post){
 
+        
         $data = [
             'title' => "Copy of " . $post->title,
             'content' => $post->content,
