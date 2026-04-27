@@ -49,3 +49,4 @@ Route::get('/posts/{post}', [PostController::class, 'show'])->name("posts.show")
 Route::patch('/posts/{post}', [PostController::class, 'status'])->name("posts.status");
 Route::post('/posts/{post}/duplicate', [PostController::class, 'duplicate'])->name("posts.duplicate");
 Route::get('/display-event', [EventController::class, 'show'])->name("event.show");
+Route::get('/display-events', [EventController::class, 'index'])->name("event.index");
