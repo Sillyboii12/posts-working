@@ -91,6 +91,6 @@ class PostController extends Controller
         $post->update([
             'status' => $request['status'],
         ]);
-        return redirect(route('posts.show', $post));
+        return redirect(route('posts.show', $post))->with('status', 'Status updated succesfully');
     }
 }
