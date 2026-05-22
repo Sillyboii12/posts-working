@@ -8,9 +8,6 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $filter = $request->filter ?? "";
@@ -31,9 +28,6 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -44,34 +38,22 @@ class PostController extends Controller
             'title' => $validated['title'],
             'content' => $validated['content']
         ];
-
         Post::create($data);
-
         return redirect(route('posts.index'))->with('status', 'Post Created');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Post $post)
     {
         return view('posts.show', ['post' => $post]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Post $post)
     {
         return view('posts.edit', ['post' => $post]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Post $post)
     {
-
         $validated = $request->validate([
             'title' => "required|min:3|string",
             'content' => "required|min:3|string",
@@ -80,21 +62,15 @@ class PostController extends Controller
             'title' => $validated['title'],
             'content' => $validated['content']
         ];
-
         $post->update($data);
-
         return redirect(route('posts.index'))->with('status', 'Post Updated');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Post $post)
     {
         $post->update([
             'deleted_at' => now(),
         ]);
-
         return redirect(route('posts.index'))->with('status', 'Post Deleted');
     }
 
@@ -106,25 +82,19 @@ class PostController extends Controller
     }
 
     public function duplicate(Post $post){
-
-
         $data = [
             'title' => "Copy of " . $post->title,
             'content' => $post->content,
         ];
 
         $postCreated = Post::create($data);
-
         return redirect(route('posts.show', $postCreated));
     }
 
     public function randomText(Request $request)
     {
         $length = $request->length ?? 10;
-
         $text = fake()->words($length, true);
         return view('posts.random', ['text' => $text]);
     }
-
-
 }
