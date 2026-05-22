@@ -6,6 +6,7 @@
         {{ session('status') }}
     </div>
     @endif
+    <a href="{{ route('posts.index', ['filter' => 'deleted']) }}">View deleted posts</a>
     <ul>
         @foreach($posts as $post)
             <li>
@@ -14,11 +15,20 @@
                 <div>
                     <a  id= "showButton" href="{{route('posts.show', $post)}}">Show</a>
                     <a  href="{{route('posts.edit', $post)}}">Edit</a>
-                    <form id="deleteButton" action="{{route('posts.destroy', $post)}}" method="post">
+                    @if ($post->deleted_at != NULL)
+                        <form id="deleteButton" action="{{route('posts.re-add', $post)}}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <input id= "deleteImprove" type="submit" value="Readd">
+                    </form>
+                    @endif
+                    @if ($post->deleted_at == NULL)
+                        <form id="deleteButton" action="{{route('posts.destroy', $post)}}" method="post">
                         @csrf
                         @method('delete')
                         <input id= "deleteImprove" type="submit" value="Delete">
                     </form>
+                    @endif
                     <form id="deleteButton" action="{{route('posts.duplicate', $post)}}" method="post">
                         @csrf
                         <input id= "deleteImprove" type="submit" value="Duplicate">

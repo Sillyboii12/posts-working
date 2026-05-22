@@ -11,6 +11,7 @@
         <a href="{{route('contact.index')}}">Feedback</a>
         <a href="{{route('about')}}">About</a>
         <a href="{{route('colors')}}">Colors</a>
+        <a href="{{route('posts.random')}}">Random text</a>
     </nav>
     <main>
         {{ $slot }}

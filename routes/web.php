@@ -40,7 +40,9 @@ Route::get('/contact/create', [ContactController::class, 'contact'])->name("cont
 Route::get('/feedback', [ContactController::class, 'index'])->name("contact.index");
 Route::post('/contact/create', [ContactController::class, 'store'])->name("contact.store");
 Route::get('/posts', [PostController::class, 'index'])->name("posts.index");
+Route::put('/posts/re-add/{post}', [PostController::class, 'add'])->name("posts.re-add");
 Route::get('/posts/create', [PostController::class, 'create'])->name("posts.create");
+Route::get('/randomText', [PostController::class, 'randomText'])->name("posts.random");
 Route::post('/posts', [PostController::class, 'store'])->name("posts.store");
 Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name("posts.edit");
 Route::put('/posts/{post}/update', [PostController::class, 'update'])->name("posts.update");
@@ -50,3 +52,4 @@ Route::patch('/posts/{post}', [PostController::class, 'status'])->name("posts.st
 Route::post('/posts/{post}/duplicate', [PostController::class, 'duplicate'])->name("posts.duplicate");
 Route::get('/display-event', [EventController::class, 'show'])->name("event.show");
 Route::get('/display-events', [EventController::class, 'index'])->name("event.index");
+

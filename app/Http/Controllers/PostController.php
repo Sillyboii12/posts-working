@@ -13,13 +13,19 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = Post::paginate(3);
+        $filter = $request->filter ?? "";
+        $posts = $filter == 'deleted' ? Post::whereNotNull('deleted_at')->paginate(3) : Post::whereNull('deleted_at')->paginate(3);
         return view('posts.index', ['posts' => $posts]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function add(Post $post)
+    {
+        $post->update([
+            'deleted_at' => NULL,
+        ]);
+        return redirect(route('posts.index'))->with('status', 'Post re-added');
+    }
+
     public function create()
     {
         return view('posts.create');
@@ -85,9 +91,13 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->delete();
+        $post->update([
+            'deleted_at' => now(),
+        ]);
+
         return redirect(route('posts.index'))->with('status', 'Post Deleted');
     }
+
     public function status(Request $request ,Post $post) {
         $post->update([
             'status' => $request['status'],
@@ -108,5 +118,13 @@ class PostController extends Controller
         return redirect(route('posts.show', $postCreated));
     }
 
-    
+    public function randomText(Request $request)
+    {
+        $length = $request->length ?? 10;
+
+        $text = fake()->words($length, true);
+        return view('posts.random', ['text' => $text]);
+    }
+
+
 }
